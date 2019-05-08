@@ -4,8 +4,8 @@ import Friend from "./Friend";
 function FriendsList(props) {
   return (
     <ul>
-      {props.friends.map((friendInfo, index) => {
-        return <Friend friendInfo={friendInfo} key={index} />;
+      {props.friends.map(friendInfo => {
+        return <Friend friendInfo={friendInfo} key={friendInfo.id} />;
       })}
     </ul>
   );
