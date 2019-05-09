@@ -10,13 +10,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      friends: [],
-      newFriend: {
-        name: "",
-        age: "",
-        email: "",
-        id: ""
-      }
+      friends: []
     };
   }
 
@@ -67,30 +61,6 @@ class App extends React.Component {
       .catch(err => console.log(err));
   };
 
-  changeHandler = e => {
-    this.setState({
-      newFriend: {
-        ...this.state.newFriend,
-        [e.target.name]: e.target.value
-      }
-    });
-  };
-
-  submitHandler = e => {
-    e.preventDefault();
-    this.setState({
-      friends: [
-        ...this.state.friends,
-        {
-          name: this.state.newFriend.name,
-          age: this.state.newFriend.age,
-          email: this.state.newFriend.email
-        }
-      ],
-      newFriend: { name: "", age: "", email: "" }
-    });
-  };
-
   render() {
     return (
       <div className="App">
@@ -112,7 +82,6 @@ class App extends React.Component {
             <AddFriendForm
               {...props}
               addFriend={this.addFriend}
-              newFriendInfo={this.state.newFriend}
               changeHandler={this.changeHandler}
               submitHandler={this.submitHandler}
             />
