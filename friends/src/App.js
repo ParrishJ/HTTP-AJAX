@@ -30,8 +30,7 @@ class App extends React.Component {
     axios
       .post("http://localhost:5000/friends", friend)
       .then(res => {
-        this.setstate({ friends: res.data });
-        /* history?????????????????????????????????? */
+        this.setState({ friends: res.data });
       })
       .catch(err => console.log(err));
   };
@@ -79,12 +78,7 @@ class App extends React.Component {
           exact
           path="/"
           render={props => (
-            <AddFriendForm
-              {...props}
-              addFriend={this.addFriend}
-              changeHandler={this.changeHandler}
-              submitHandler={this.submitHandler}
-            />
+            <AddFriendForm {...props} addFriend={this.addFriend} />
           )}
         />
       </div>
