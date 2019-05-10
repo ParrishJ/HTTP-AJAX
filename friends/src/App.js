@@ -35,21 +35,6 @@ class App extends React.Component {
       .catch(err => console.log(err));
   };
 
-  updateFriend = updatedFriend => {
-    axios
-      .put(`http://localhost:5000/friends/${updatedFriend.id}`, updatedFriend)
-      .then(res => {
-        this.setState({ friends: res.data });
-        /* history????????????????????? */
-      })
-      .catch(err => console.log(err));
-  };
-
-  updateForm = friend => {
-    this.setState({ activeFriend: friend });
-    /* history????????????????????? */
-  };
-
   deleteFriend = id => {
     axios
       .delete(`http://localhost:5000/friends/${id}`)
