@@ -10,13 +10,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      friends: [],
-      newFriend: {
-        name: "",
-        age: "",
-        email: "",
-        id: ""
-      }
+      friends: []
     };
   }
 
@@ -36,25 +30,9 @@ class App extends React.Component {
     axios
       .post("http://localhost:5000/friends", friend)
       .then(res => {
-        this.setstate({ items: res.data });
-        /* history?????????????????????????????????? */
-      })
-      .catch(err => console.log(err));
-  };
-
-  updateFriend = updatedFriend => {
-    axios
-      .put(`http://localhost:5000/friends/${updatedFriend.id}`, updatedFriend)
-      .then(res => {
         this.setState({ friends: res.data });
-        /* history????????????????????? */
       })
       .catch(err => console.log(err));
-  };
-
-  updateForm = friend => {
-    this.setState({ activeFriend: friend });
-    /* history????????????????????? */
   };
 
   deleteFriend = id => {
@@ -67,30 +45,6 @@ class App extends React.Component {
       .catch(err => console.log(err));
   };
 
-  changeHandler = e => {
-    this.setState({
-      newFriend: {
-        ...this.state.newFriend,
-        [e.target.name]: e.target.value
-      }
-    });
-  };
-
-  submitHandler = e => {
-    e.preventDefault();
-    this.setState({
-      friends: [
-        ...this.state.friends,
-        {
-          name: this.state.newFriend.name,
-          age: this.state.newFriend.age,
-          email: this.state.newFriend.email
-        }
-      ],
-      newFriend: { name: "", age: "", email: "" }
-    });
-  };
-
   render() {
     return (
       <div className="App">
@@ -98,19 +52,18 @@ class App extends React.Component {
           exact
           path="/"
           render={props => (
-            <FriendsList {...props} friends={this.state.friends} />
+            <FriendsList
+              {...props}
+              friends={this.state.friends}
+              deleteFriend={this.deleteFriend}
+            />
           )}
         />
         <Route
           exact
           path="/"
           render={props => (
-            <AddFriendForm
-              {...props}
-              newFriendInfo={this.state.newFriend}
-              changeHandler={this.changeHandler}
-              submitHandler={this.submitHandler}
-            />
+            <AddFriendForm {...props} addFriend={this.addFriend} />
           )}
         />
       </div>
